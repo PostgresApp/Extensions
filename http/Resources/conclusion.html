@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Installation Complete</title>
+  <style>
+	body {
+	  font-family: -apple-system;
+	  font-size: 13px;
+	  margin: 20px;
+	  line-height: 1.5;
+	}
+	h1 {
+	  font-size: 18px;
+	  font-weight: 600;
+	  margin-top: 0;
+	}
+	p {
+	  margin-bottom: 1em;
+	}
+	tt {
+		font-family: Menlo, monospace;
+	}
+  </style>
+</head>
+<body>
+  <h1>Please restart the PostgreSQL server!</h1>
+  <p>pgsql-http @EXTENSION_VERSION@ for PostgreSQL @PG_MAJOR_VERSION@ has been installed successfully.</p>
+  <p>
+	  You must stop and restart your PostgreSQL server before using the extension.
+	  After restarting the server, you can enable the extension by running the SQL command <tt>CREATE EXTENSION http;</tt>
+  </p>
+
+</body>
+</html>

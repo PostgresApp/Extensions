@@ -1,0 +1,105 @@
+diff -ruN -x t pg_parquet-0.4.0/Cargo.toml pg_parquet-0.4.0.patched/Cargo.toml
+--- pg_parquet-0.4.0/Cargo.toml	2025-05-06 11:40:20
++++ pg_parquet-0.4.0.patched/Cargo.toml	2025-07-02 15:34:00
+@@ -12,7 +12,8 @@
+ path = "./src/bin/pgrx_embed.rs"
+ 
+ [features]
+-default = ["pg17"]
++default = ["pg18"]
++pg18 = ["pgrx/pg18", "pgrx-tests/pg18"]
+ pg17 = ["pgrx/pg17", "pgrx-tests/pg17"]
+ pg16 = ["pgrx/pg16", "pgrx-tests/pg16"]
+ pg15 = ["pgrx/pg15", "pgrx-tests/pg15"]
+@@ -40,7 +41,7 @@
+     "object_store",
+     "arrow_canonical_extension_types",
+ ]}
+-pgrx = "=0.14.1"
++pgrx = "=0.15.0"
+ rust-ini = "0.21"
+ serde = "1"
+ serde_json = "1"
+@@ -48,7 +49,7 @@
+ url = "2"
+ 
+ [dev-dependencies]
+-pgrx-tests = "=0.14.1"
++pgrx-tests = "=0.15.0"
+ 
+ [profile.dev]
+ panic = "unwind"
+diff -ruN -x t pg_parquet-0.4.0/src/lib.rs pg_parquet-0.4.0.patched/src/lib.rs
+--- pg_parquet-0.4.0/src/lib.rs	2025-05-06 11:40:20
++++ pg_parquet-0.4.0.patched/src/lib.rs	2025-07-02 16:10:16
+@@ -36,9 +36,9 @@
+ #[pg_guard]
+ pub extern "C-unwind" fn _PG_init() {
+     GucRegistry::define_bool_guc(
+-        "pg_parquet.enable_copy_hooks",
+-        "Enable parquet copy hooks",
+-        "Enable parquet copy hooks",
++        c"pg_parquet.enable_copy_hooks",
++        c"Enable parquet copy hooks",
++        c"Enable parquet copy hooks",
+         &ENABLE_PARQUET_COPY_HOOK,
+         GucContext::Userset,
+         GucFlags::default(),
+diff -ruN -x t pg_parquet-0.4.0/src/parquet_copy_hook/copy_to.rs pg_parquet-0.4.0.patched/src/parquet_copy_hook/copy_to.rs
+--- pg_parquet-0.4.0/src/parquet_copy_hook/copy_to.rs	2025-05-06 11:40:20
++++ pg_parquet-0.4.0.patched/src/parquet_copy_hook/copy_to.rs	2025-07-02 15:57:40
+@@ -83,6 +83,7 @@
+             CommandTag::CMDTAG_COPY,
+             plans.as_ptr(),
+             std::ptr::null_mut(),
++            std::ptr::null_mut(),
+         );
+ 
+         PortalStart(portal.as_ptr(), params.as_ptr(), 0, GetActiveSnapshot());
+@@ -96,7 +97,6 @@
+             portal.as_ptr(),
+             i64::MAX,
+             false,
+-            true,
+             parquet_dest.as_ptr(),
+             parquet_dest.as_ptr(),
+             &mut completion_tag as _,
+diff -ruN -x t pg_parquet-0.4.0/src/parquet_copy_hook/pg_compat.rs pg_parquet-0.4.0.patched/src/parquet_copy_hook/pg_compat.rs
+--- pg_parquet-0.4.0/src/parquet_copy_hook/pg_compat.rs	2025-05-06 11:40:20
++++ pg_parquet-0.4.0.patched/src/parquet_copy_hook/pg_compat.rs	2025-07-02 15:37:03
+@@ -25,7 +25,7 @@
+         )
+     }
+ 
+-    #[cfg(any(feature = "pg15", feature = "pg16", feature = "pg17"))]
++    #[cfg(any(feature = "pg15", feature = "pg16", feature = "pg17", feature = "pg18"))]
+     unsafe {
+         pgrx::pg_sys::pg_analyze_and_rewrite_fixedparams(
+             raw_stmt,
+@@ -49,7 +49,7 @@
+             .to_string()
+     }
+ 
+-    #[cfg(any(feature = "pg15", feature = "pg16", feature = "pg17"))]
++    #[cfg(any(feature = "pg15", feature = "pg16", feature = "pg17", feature = "pg18"))]
+     unsafe {
+         let val = (*(val as *mut pgrx::pg_sys::String)).sval;
+ 
+@@ -67,7 +67,7 @@
+         pgrx::pg_sys::EmitWarningsOnPlaceholders(guc_prefix.as_pg_cstr())
+     }
+ 
+-    #[cfg(any(feature = "pg15", feature = "pg16", feature = "pg17"))]
++    #[cfg(any(feature = "pg15", feature = "pg16", feature = "pg17", feature = "pg18"))]
+     unsafe {
+         pgrx::pg_sys::MarkGUCPrefixReserved(guc_prefix.as_pg_cstr())
+     }
+@@ -75,7 +75,7 @@
+ 
+ /// check_copy_table_permission checks if the user has permission to copy from/to the table.
+ /// This is taken from the original PostgreSQL DoCopy function.
+-#[cfg(any(feature = "pg16", feature = "pg17"))]
++#[cfg(any(feature = "pg16", feature = "pg17", feature = "pg18"))]
+ pub(crate) fn check_copy_table_permission(
+     p_stmt: &PgBox<PlannedStmt>,
+     p_state: &PgBox<ParseState>,

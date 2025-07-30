@@ -16,7 +16,7 @@ diff -ruN -x t pg_parquet-0.4.0/Cargo.toml pg_parquet-0.4.0.patched/Cargo.toml
      "arrow_canonical_extension_types",
  ]}
 -pgrx = "=0.14.1"
-+pgrx = "=0.15.0"
++pgrx = { git = "https://github.com/pgcentralfoundation/pgrx.git", rev = "d2837c455c1d00b3191203093b004058d9ee83fe" }
  rust-ini = "0.21"
  serde = "1"
  serde_json = "1"
@@ -25,7 +25,7 @@ diff -ruN -x t pg_parquet-0.4.0/Cargo.toml pg_parquet-0.4.0.patched/Cargo.toml
  
  [dev-dependencies]
 -pgrx-tests = "=0.14.1"
-+pgrx-tests = "=0.15.0"
++pgrx-tests = { git = "https://github.com/pgcentralfoundation/pgrx.git", rev = "d2837c455c1d00b3191203093b004058d9ee83fe" }
  
  [profile.dev]
  panic = "unwind"

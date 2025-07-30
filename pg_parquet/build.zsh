@@ -20,7 +20,7 @@ echo
 echo 
 echo Installing pgrx
 echo
-cargo install cargo-pgrx --version 0.15.0 --locked
+cargo install cargo-pgrx --git https://github.com/pgcentralfoundation/pgrx.git --rev d2837c455c1d00b3191203093b004058d9ee83fe
 
 echo
 echo 

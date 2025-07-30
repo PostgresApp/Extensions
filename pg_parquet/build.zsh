@@ -30,7 +30,6 @@ mkdir -p Build
 curl -L https://github.com/CrunchyData/pg_parquet/archive/refs/tags/v$EXTENSION_VERSION.tar.gz | tar x --cd Build
 patch -d Build <pg_parquet.$EXTENSION_VERSION.patch
 
-# build and install the extension
 echo
 echo 
 echo "Building Extension..."
@@ -44,10 +43,12 @@ echo
 	cargo pgrx package --pg-config "$PREFIX"/bin/pg_config --out-dir ..
 )
 	
-# codesign libraries
+echo
+echo 
+echo "Signing Libraries..."
+echo
 codesign --sign "Developer ID Application" --timestamp Build$PREFIX/lib/postgresql/*.dylib
 
-# Build Installer Package
 echo
 echo 
 echo "Creating Installer Package..."
@@ -61,7 +62,6 @@ pkgbuild --root Build$PREFIX --install-location /Library/Application\ Support/Po
 productbuild --distribution Build/distribution.xml --resources Build/Resources --sign "Developer ID Installer" $EXTENSION_NAME-pg$PG_MAJOR_VERSION-$EXTENSION_VERSION.pkg
 rm $EXTENSION_NAME-$PG_MAJOR_VERSION.pkg
 
-# Notarize installer package
 echo
 echo 
 echo "Notarizing package..."

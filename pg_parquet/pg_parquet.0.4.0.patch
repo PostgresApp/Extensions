@@ -48,14 +48,6 @@ diff -ruN -x t pg_parquet-0.4.0/src/lib.rs pg_parquet-0.4.0.patched/src/lib.rs
 diff -ruN -x t pg_parquet-0.4.0/src/parquet_copy_hook/copy_to.rs pg_parquet-0.4.0.patched/src/parquet_copy_hook/copy_to.rs
 --- pg_parquet-0.4.0/src/parquet_copy_hook/copy_to.rs	2025-05-06 11:40:20
 +++ pg_parquet-0.4.0.patched/src/parquet_copy_hook/copy_to.rs	2025-07-02 15:57:40
-@@ -83,6 +83,7 @@
-             CommandTag::CMDTAG_COPY,
-             plans.as_ptr(),
-             std::ptr::null_mut(),
-+            std::ptr::null_mut(),
-         );
- 
-         PortalStart(portal.as_ptr(), params.as_ptr(), 0, GetActiveSnapshot());
 @@ -96,7 +97,6 @@
              portal.as_ptr(),
              i64::MAX,

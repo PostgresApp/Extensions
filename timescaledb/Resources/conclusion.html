@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Installation Complete</title>
+  <style>
+	body {
+	  font-family: -apple-system;
+	  font-size: 13px;
+	  margin: 20px;
+	  line-height: 1.5;
+	}
+	h1 {
+	  font-size: 18px;
+	  font-weight: 600;
+	  margin-top: 0;
+	}
+	p {
+	  margin-bottom: 1em;
+	}
+	tt {
+		font-family: Menlo, monospace;
+	}
+  </style>
+</head>
+<body>
+  <p>@EXTENSION_NAME@ @EXTENSION_VERSION@ for PostgreSQL @PG_MAJOR_VERSION@ has been installed successfully.</p>
+  <p>
+	  To enable this extension, a few more steps are necessary:
+  </p>
+  <ol>
+	  <li>Add a line to your <tt>postgresql.conf</tt> file: <tt>shared_preload_libraries = '@EXTENSION_NAME@'</tt></li>
+	  <li>Restart the PostgreSQL server</li>
+	  <li>Connect to the database and enable the extension with <tt>CREATE EXTENSION @EXTENSION_NAME@;</tt></li>
+  </ol>
+  <p>
+	  If you are upgrading from a previous version of the extension, you do not need to restart the server.
+	  Please execute the command <tt>ALTER EXTENSION @EXTENSION_NAME@ UPDATE;</tt> instead. You need to run this command on every database that uses the extension.
+  </p>
+
+</body>
+</html>

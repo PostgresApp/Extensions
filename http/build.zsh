@@ -2,7 +2,7 @@
 
 set -e
 
-EXTENSION_VERSION=1.6.3
+EXTENSION_VERSION=1.7.0 # https://github.com/pramsey/pgsql-http/releases
 PG_MAJOR_VERSION=18
 PREFIX=/Applications/Postgres.app/Contents/Versions/$PG_MAJOR_VERSION
 

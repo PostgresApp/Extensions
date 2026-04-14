@@ -1,0 +1,17 @@
+#!/bin/zsh
+
+INSTALL_PATH="$2"
+
+if [[ "$INSTALL_PATH" == *"Application Support"/Postgres/Extensions/*/* ]]; then
+  if [[ -d "$INSTALL_PATH" ]]; then
+	echo "Deleting directory: $INSTALL_PATH"
+	rm -rf -- "$INSTALL_PATH"
+	if [[ $? -ne 0 ]]; then
+	  echo "Error: Failed to delete $INSTALL_PATH" >&2
+	  exit 1
+	fi
+  fi
+else
+  echo "Error: Install path does not match expected pattern. Aborting." >&2
+  exit 1
+fi

@@ -3,7 +3,7 @@
 set -e
 
 EXTENSION_NAME=pg_search
-EXTENSION_VERSION=phil-pg18
+EXTENSION_VERSION=0.22.6 # https://github.com/paradedb/paradedb/releases
 CARGO_PGRX_VERSION=0.17.0 # https://github.com/paradedb/paradedb/blob/v$EXTENSION_VERSION/Cargo.lock
 PG_MAJOR_VERSION=18
 PREFIX=/Applications/Postgres.app/Contents/Versions/$PG_MAJOR_VERSION
@@ -29,7 +29,7 @@ echo
 echo Downloading Extension Sources
 echo
 mkdir -p Build
-curl -L https://github.com/paradedb/paradedb/archive/refs/heads/phil/pg18.tar.gz | tar x --cd Build
+curl -L https://github.com/paradedb/paradedb/archive/refs/tags/v$EXTENSION_VERSION.tar.gz | tar x --cd Build
 
 # build and install the extension
 echo

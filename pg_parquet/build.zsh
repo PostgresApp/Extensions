@@ -4,6 +4,7 @@ set -e
 
 EXTENSION_NAME=pg_parquet
 EXTENSION_VERSION=0.4.0
+CARGO_PGRX_VERSION=0.16.0 # https://github.com/CrunchyData/pg_parquet/blob/v$EXTENSION_VERSION/Cargo.lock
 PG_MAJOR_VERSION=18
 PREFIX=/Applications/Postgres.app/Contents/Versions/$PG_MAJOR_VERSION
 
@@ -20,7 +21,7 @@ echo
 echo 
 echo Installing pgrx
 echo
-cargo install cargo-pgrx --git https://github.com/pgcentralfoundation/pgrx.git --rev d2837c455c1d00b3191203093b004058d9ee83fe
+cargo install cargo-pgrx@$CARGO_PGRX_VERSION
 
 echo
 echo 

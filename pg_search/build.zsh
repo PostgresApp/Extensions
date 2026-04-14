@@ -4,6 +4,7 @@ set -e
 
 EXTENSION_NAME=pg_search
 EXTENSION_VERSION=phil-pg18
+CARGO_PGRX_VERSION=0.17.0 # https://github.com/paradedb/paradedb/blob/v$EXTENSION_VERSION/Cargo.lock
 PG_MAJOR_VERSION=18
 PREFIX=/Applications/Postgres.app/Contents/Versions/$PG_MAJOR_VERSION
 INSTALL_ROOT=Build/paradedb-$EXTENSION_VERSION/target/release/pg_search-pg$PG_MAJOR_VERSION$PREFIX
@@ -21,7 +22,7 @@ echo
 echo 
 echo Installing pgrx
 echo
-cargo install cargo-pgrx
+cargo install cargo-pgrx@$CARGO_PGRX_VERSION
 
 echo
 echo 

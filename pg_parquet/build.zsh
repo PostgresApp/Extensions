@@ -3,7 +3,7 @@
 set -e
 
 EXTENSION_NAME=pg_parquet
-EXTENSION_VERSION=0.4.0
+EXTENSION_VERSION=0.5.1 # https://github.com/CrunchyData/pg_parquet/releases
 CARGO_PGRX_VERSION=0.16.0 # https://github.com/CrunchyData/pg_parquet/blob/v$EXTENSION_VERSION/Cargo.lock
 PG_MAJOR_VERSION=18
 PREFIX=/Applications/Postgres.app/Contents/Versions/$PG_MAJOR_VERSION
@@ -29,7 +29,6 @@ echo Downloading Extension Sources
 echo
 mkdir -p Build
 curl -L https://github.com/CrunchyData/pg_parquet/archive/refs/tags/v$EXTENSION_VERSION.tar.gz | tar x --cd Build
-patch -d Build <pg_parquet.$EXTENSION_VERSION.patch
 
 echo
 echo 

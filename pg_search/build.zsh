@@ -15,7 +15,7 @@ echo
 echo 
 echo Installing Rust
 echo
-curl -sSf https://sh.rustup.rs | sh
+curl -sSf https://sh.rustup.rs | sh -s -- -y
 
 echo
 echo 

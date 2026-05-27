@@ -3,7 +3,7 @@
 set -e
 
 EXTENSION_NAME=timescaledb
-EXTENSION_VERSION=2.26.3 # https://github.com/timescale/timescaledb/releases
+EXTENSION_VERSION=2.27.1 # https://github.com/timescale/timescaledb/releases
 PG_MAJOR_VERSION=18
 PREFIX=/Applications/Postgres.app/Contents/Versions/$PG_MAJOR_VERSION
 DESTDIR=$PWD/Build

@@ -4,7 +4,7 @@ set -e
 
 EXTENSION_NAME=pg_cron
 EXTENSION_REPO_URL=https://github.com/citusdata/pg_cron
-EXTENSION_VERSION=1.6.7 # https://github.com/citusdata/pg_cron/releases
+EXTENSION_VERSION=1.6.8 # https://github.com/citusdata/pg_cron/releases
 PG_MAJOR_VERSION=18
 PREFIX=/Applications/Postgres.app/Contents/Versions/$PG_MAJOR_VERSION
 

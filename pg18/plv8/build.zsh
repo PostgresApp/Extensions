@@ -3,7 +3,7 @@
 set -e
 
 EXTENSION_NAME=plv8
-EXTENSION_VERSION=3.2.4 # https://github.com/plv8/plv8/tags
+EXTENSION_VERSION=3.2.5 # https://github.com/plv8/plv8/tags
 PG_MAJOR_VERSION=18
 PREFIX=/Applications/Postgres.app/Contents/Versions/$PG_MAJOR_VERSION
 DESTDIR=$PWD/Build

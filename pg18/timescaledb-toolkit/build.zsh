@@ -4,8 +4,8 @@ set -e
 
 EXTENSION_NAME=timescaledb_toolkit
 REPO_NAME=timescaledb-toolkit
-EXTENSION_VERSION=1.22.0 # https://github.com/timescale/timescaledb/releases
-CARGO_PGRX_VERSION=0.16.1 # https://github.com/timescale/timescaledb-toolkit/blob/$EXTENSION_VERSION/extension/Cargo.toml
+EXTENSION_VERSION=1.26.0 # https://github.com/timescale/timescaledb-toolkit/releases
+CARGO_PGRX_VERSION=0.18.1 # https://github.com/timescale/timescaledb-toolkit/blob/$EXTENSION_VERSION/extension/Cargo.toml
 PG_MAJOR_VERSION=18
 PREFIX=/Applications/Postgres.app/Contents/Versions/$PG_MAJOR_VERSION
 DESTDIR=$PWD/Build

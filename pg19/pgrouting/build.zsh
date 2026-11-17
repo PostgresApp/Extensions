@@ -33,6 +33,9 @@ make -C Build/$EXTENSION_NAME-$EXTENSION_VERSION/build install DESTDIR="$DESTDIR
 EXTENSION_MAJOR_VERSION=$(echo $EXTENSION_VERSION | sed -E 's/^([0-9]+\.[0-9]+)\..*$/\1/')
 mv $DESTDIR/$PREFIX/lib/postgresql/libpgrouting-$EXTENSION_MAJOR_VERSION.so $DESTDIR/$PREFIX/lib/postgresql/libpgrouting-$EXTENSION_MAJOR_VERSION.dylib
 
+# codesign libraries
+codesign --sign "Developer ID Application" --timestamp "$INSTALL_ROOT"/lib/postgresql/*.dylib
+
 # Build Installer Package
 echo
 echo 
